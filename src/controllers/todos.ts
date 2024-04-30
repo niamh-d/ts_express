@@ -32,3 +32,16 @@ export const updateTodo: RequestHandler<{ id: string }> = (req, res, next) => {
     .status(200)
     .json({ message: "Todo updated!", updatedTodo: TODOS[todoIndex] });
 };
+
+export const deleteTodo: RequestHandler<{ id: string }> = (req, res, next) => {
+  const id = req.params.id;
+
+  const todoIndex = TODOS.findIndex((todo) => todo.id === id);
+  if (todoIndex < 0) {
+    return res.status(404).json({ message: "Todo not found!" });
+  }
+
+  TODOS.splice(todoIndex, 1);
+
+  res.status(200).json({ message: "Todo deleted!" });
+};
