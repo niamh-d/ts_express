@@ -1,9 +1,13 @@
 import express, { Request, Response, NextFunction } from "express";
 
+import { json } from "body-parser";
+
 import todosRoutes from "./routes/todos";
 
 const app = express();
 const port = 3000;
+
+app.use(json());
 
 app.use("/todos", todosRoutes);
 
